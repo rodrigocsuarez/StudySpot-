@@ -1,7 +1,5 @@
-# StudySpot-
-Projeto  WEB - StudySpot
-
-# StudySpot 
+# StudySpot
+Projeto  WEB 
 
 > **Proposta de Valor:** Plataforma web colaborativa focada na localização, partilha e avaliação de espaços de estudo (cafés, bibliotecas e espaços de cowork), otimizada para as necessidades de estudantes e trabalhadores remotos.
 
