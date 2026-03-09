@@ -24,5 +24,5 @@ Um mapa interativo onde os utilizadores podem:
 
 ##  Stack Tecnológica
 * **Frontend:** HTML, CSS, JavaScript.
-* **Backend:** Node.js.
+* **Backend:** PHP.
 * **Base de Dados:** MySQL.
