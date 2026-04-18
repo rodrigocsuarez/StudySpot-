@@ -26,3 +26,7 @@ Um mapa interativo onde os utilizadores podem:
 * **Frontend:** HTML, CSS, JavaScript.
 * **Backend:** PHP.
 * **Base de Dados:** MySQL.
+
+## Logo
+
+
