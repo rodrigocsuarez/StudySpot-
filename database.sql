@@ -44,3 +44,31 @@ CREATE TABLE reviews (
     FOREIGN KEY (spot_id) REFERENCES spots(id),
     FOREIGN KEY (user_id) REFERENCES utilizadores(id)
 );
+
+-- 1. Desativar temporariamente a verificação de chaves estrangeiras
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- 2. Limpar as tabelas e reiniciar os IDs (Auto Increment) de volta para 1
+TRUNCATE TABLE reviews;
+TRUNCATE TABLE spots;
+TRUNCATE TABLE utilizadores;
+
+-- 3. Reativar a verificação de chaves
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- 4. Inserir o utilizador "Semente" (Forçamos o ID a ser 1)
+
+-- Assim podes usar o email admin@studyspot.com e a senha "password" para testar o login.
+INSERT INTO utilizadores (id, nome, email, senha, role) 
+VALUES (1, 'Rodrigo', 'admin@studyspot.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+
+-- 5. Inserir os Locais, agora com a certeza absoluta que o autor com ID 1 existe
+INSERT INTO spots (nome, tipo, lat, lng, criado_por) VALUES 
+('Biblioteca Nacional', 'Biblioteca', 38.7515, -9.1517, 1),
+('Fábrica Coffee Roasters', 'Café', 38.7189, -9.1425, 1),
+('LACS Conde d’Óbidos', 'Cowork', 38.7042, -9.1634, 1);
+
+
+
+
+

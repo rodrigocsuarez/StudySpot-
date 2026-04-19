@@ -1,7 +1,7 @@
 <?php
 // api/auth.php
 session_start();
-require 'db_connect.php'; // Confirma se o teu ficheiro se chama assim
+require 'db_connect.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $acao = $_POST['acao'];
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = trim($_POST['email']);
         $senha_limpa = $_POST['senha'];
 
-        // Encriptar a password (Regra de ouro da engenharia de software)
+        // Encriptar a password 
         $senha_encriptada = password_hash($senha_limpa, PASSWORD_DEFAULT);
 
         try {
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Verificar se o utilizador existe E se a password encriptada bate certo
             if ($user && password_verify($senha_inserida, $user['senha'])) {
                 
-                // Sucesso! Guardar os dados na sessão ("bilhete de identidade" do browser)
+                // Sucesso! Guardar os dados na sessão 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_nome'] = $user['nome'];
                 $_SESSION['user_role'] = $user['role'];
