@@ -58,7 +58,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- 4. Inserir o utilizador "Semente" (Forçamos o ID a ser 1)
 
--- Assim podes usar o email admin@studyspot.com e a senha "password" para testar o login.
+-- Assim podemos usar o email admin@studyspot.com e a senha "password" para testar o login.
 INSERT INTO utilizadores (id, nome, email, senha, role) 
 VALUES (1, 'Rodrigo', 'admin@studyspot.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 

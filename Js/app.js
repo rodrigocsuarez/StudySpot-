@@ -36,10 +36,11 @@ async function carregarSpots() {
             L.marker([spot.lat, spot.lng]).addTo(mapa)
                 .bindPopup(`<b class="text-indigo-600">${spot.nome}</b><br>${spot.tipo}`);
 
-            // Formatar as médias (garante que não dá erro se vierem nulas)
+ // Formatar as médias (garante que não dá erro se vierem nulas)
             const ruido = parseFloat(spot.media_ruido || 0).toFixed(1);
             const tomadas = parseFloat(spot.media_tomadas || 0).toFixed(1);
             const wifi = parseFloat(spot.media_wifi || 0).toFixed(1);
+            const lotacao = parseFloat(spot.media_lotacao || 0).toFixed(1); // <-- EXTRAÍDO AQUI
 
             // Injetar o HTML do Cartão
             const cardHTML = `
@@ -54,7 +55,7 @@ async function carregarSpots() {
                         <span>🤫 Ruído: <strong>${ruido}</strong>/5</span>
                         <span>🔋 Tomadas: <strong>${tomadas}</strong>/5</span>
                         <span>📶 Wi-Fi: <strong>${wifi}</strong>/5</span>
-                    </div>
+                        <span>👥 Lotação: <strong>${lotacao}</strong>/5</span> </div>
                     <button onclick="abrirAvaliacao(${spot.id}, '${spot.nome}')" class="mt-3 w-full bg-indigo-100 hover:bg-indigo-600 hover:text-white text-indigo-800 text-xs font-bold py-2 rounded transition">
                         Ver e Avaliar
                     </button>
@@ -85,6 +86,7 @@ function abrirAvaliacao(spotId, nome) {
     dados.append('wifi', 5); // Fixo por agora para testar o backend
     dados.append('tomadas', 5);
     dados.append('comentario', 'Avaliação rápida de teste');
+    dados.append('lotacao', 3); // Fixo por agora para testar
 
     fetch('api/submit_review.php', {
         method: 'POST',
