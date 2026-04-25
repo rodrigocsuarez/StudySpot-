@@ -4,9 +4,10 @@ header('Content-Type: application/json; charset=utf-8');
 require 'db_connect.php'; 
 
 try {
-    // Procuramos os spots e calculamos a média das avaliações (AVG) de uma só vez
+    // Procuramos os spots e calculamos a média das avaliações de uma só vez
     $query = "
         SELECT 
+            s.id, s.nome, s.tipo, s.lat, s.lng, s.descricao,
             s.id, s.nome, s.tipo, s.lat, s.lng,
             COALESCE(AVG(r.nota_ruido), 0) as media_ruido,
             COALESCE(AVG(r.nota_wifi), 0) as media_wifi,

@@ -56,8 +56,8 @@ async function carregarSpots() {
                         <span>🔋 Tomadas: <strong>${tomadas}</strong>/5</span>
                         <span>📶 Wi-Fi: <strong>${wifi}</strong>/5</span>
                         <span>👥 Lotação: <strong>${lotacao}</strong>/5</span> </div>
-                    <button onclick="abrirAvaliacao(${spot.id}, '${spot.nome}')" class="mt-3 w-full bg-indigo-100 hover:bg-indigo-600 hover:text-white text-indigo-800 text-xs font-bold py-2 rounded transition">
-                        Ver e Avaliar
+                    <button onclick='abrirDetalhes(${JSON.stringify(spot).replace(/'/g, "&#39;")})' class="mt-3 w-full bg-white border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-bold py-2 rounded-lg transition shadow-sm">
+                        Ver Detalhes
                     </button>
                 </div>
             `;

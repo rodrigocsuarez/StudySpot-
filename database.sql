@@ -26,6 +26,7 @@ CREATE TABLE spots (
     tipo ENUM('Café', 'Biblioteca', 'Cowork') NOT NULL,
     lat DECIMAL(10, 8) NOT NULL,
     lng DECIMAL(11, 8) NOT NULL,
+    descricao TEXT DEFAULT NULL, -- <-- A coluna nasce logo aqui
     criado_por INT,
     FOREIGN KEY (criado_por) REFERENCES utilizadores(id)
 );
@@ -68,7 +69,7 @@ INSERT INTO spots (nome, tipo, lat, lng, criado_por) VALUES
 ('Fábrica Coffee Roasters', 'Café', 38.7189, -9.1425, 1),
 ('LACS Conde d’Óbidos', 'Cowork', 38.7042, -9.1634, 1);
 
-
+UPDATE spots SET descricao = 'Espaço ideal para sessões de estudo profundo. Ambiente verificado pela comunidade.' WHERE id > 0;
 
 
 
