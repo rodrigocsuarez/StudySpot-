@@ -1,4 +1,4 @@
-#-- Se a base de dados já existir e precisares de a limpar para aplicar o novo esquema:
+#-- Se a base de dados já existir 
 DROP DATABASE IF EXISTS studyspot_db;
 
 #-- 1. Criar a Base de Dados

@@ -72,7 +72,42 @@ if ($esta_logado) {
 
     </div>
 
+       <div id="modal-detalhes" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[90] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            
+            <div class="bg-white p-4 border-b border-gray-100 flex justify-between items-start">
+                <div>
+                    <h3 class="font-bold text-xl text-gray-800" id="detalhes-nome">Nome do Local</h3>
+                    <span id="detalhes-tipo" class="text-[10px] text-indigo-600 bg-indigo-50 px-2 py-1 rounded font-bold uppercase border border-indigo-100 mt-1 inline-block">Tipo</span>
+                </div>
+                <button onclick="fecharDetalhes()" class="text-gray-400 hover:text-gray-800 font-bold text-2xl leading-none transition">&times;</button>
+            </div>
+            
+            <div class="p-6">
+                <p id="detalhes-descricao" class="text-sm text-gray-600 mb-6 border-l-4 border-indigo-400 pl-3 bg-gray-50 py-2 rounded-r">
+                    A carregar descrição...
+                </p>
+
+                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Média da Comunidade</h4>
+                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 bg-white p-4 rounded-lg border border-gray-200 mb-6 shadow-sm">
+                    <div class="flex justify-between"><span>🤫 Ruído:</span> <strong id="detalhes-ruido">0</strong></div>
+                    <div class="flex justify-between"><span>🔋 Tomadas:</span> <strong id="detalhes-tomadas">0</strong></div>
+                    <div class="flex justify-between"><span>📶 Wi-Fi:</span> <strong id="detalhes-wifi">0</strong></div>
+                    <div class="flex justify-between"><span>👥 Lotação:</span> <strong id="detalhes-lotacao">0</strong></div>
+                </div>
+
+                <div class="border-t border-gray-100 pt-5 text-center">
+                    <p class="text-xs text-gray-500 mb-3">Já estiveste aqui recentemente?</p>
+                    <button id="btn-abrir-avaliacao" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition shadow-md">
+                        Deixar a Minha Avaliação
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
+
 </body>
 </html>
