@@ -88,12 +88,17 @@ if ($esta_logado) {
                     A carregar descrição...
                 </p>
 
-                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Média da Comunidade</h4>
-                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 bg-white p-4 rounded-lg border border-gray-200 mb-6 shadow-sm">
-                    <div class="flex justify-between"><span>🤫 Ruído:</span> <strong id="detalhes-ruido">0</strong></div>
-                    <div class="flex justify-between"><span>🔋 Tomadas:</span> <strong id="detalhes-tomadas">0</strong></div>
-                    <div class="flex justify-between"><span>📶 Wi-Fi:</span> <strong id="detalhes-wifi">0</strong></div>
-                    <div class="flex justify-between"><span>👥 Lotação:</span> <strong id="detalhes-lotacao">0</strong></div>
+                                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Média da Comunidade</h4>
+                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 bg-white p-4 rounded-lg border border-gray-200 mb-4 shadow-sm">
+                    <div class="flex items-center gap-1"><span>🤫 Ruído:</span> <strong id="detalhes-ruido">0</strong></div>
+                    <div class="flex items-center gap-1"><span>🔋 Tomadas:</span> <strong id="detalhes-tomadas">0</strong></div>
+                    <div class="flex items-center gap-1"><span>📶 Wi-Fi:</span> <strong id="detalhes-wifi">0</strong></div>
+                    <div class="flex items-center gap-1"><span>👥 Lotação:</span> <strong id="detalhes-lotacao">0</strong></div>
+                </div>
+
+                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Comentários</h4>
+                <div id="lista-comentarios" class="max-h-40 overflow-y-auto space-y-3 mb-6 pr-2 scrollbar-thin">
+                    <p class="text-xs text-gray-400 italic">A carregar opiniões...</p>
                 </div>
 
                 <div class="border-t border-gray-100 pt-5 text-center">
@@ -105,9 +110,83 @@ if ($esta_logado) {
             </div>
         </div>
     </div>
+    
+// FORMULÁRIO
+    <div id="modal-avaliacao" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            
+            <div class="bg-indigo-600 p-4 text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg">Avaliar: <span id="modal-nome-spot">Local</span></h3>
+                <button onclick="fecharModal()" class="text-white hover:text-indigo-200 font-bold text-2xl leading-none">&times;</button>
+            </div>
+            
+            <form id="form-review" class="p-6 space-y-4">
+                <input type="hidden" id="modal-spot-id" name="spot_id">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">🤫 Ruído</label>
+                        <select name="ruido" required class="w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 p-2 text-sm">
+                            <option value="">Escolhe...</option>
+                            <option value="1">1 - Silêncio Absoluto</option>
+                            <option value="2">2 - Muito Calmo</option>
+                            <option value="3">3 - Normal</option>
+                            <option value="4">4 - Barulhento</option>
+                            <option value="5">5 - Impossível focar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">👥 Lotação</label>
+                        <select name="lotacao" required class="w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 p-2 text-sm">
+                            <option value="">Escolhe...</option>
+                            <option value="1">1 - Vazio</option>
+                            <option value="2">2 - Muito Espaço</option>
+                            <option value="3">3 - Normal</option>
+                            <option value="4">4 - Quase Cheio</option>
+                            <option value="5">5 - Sem Lugares</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">🔋 Tomadas</label>
+                        <select name="tomadas" required class="w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 p-2 text-sm">
+                            <option value="">Escolhe...</option>
+                            <option value="1">1 - Nenhuma</option>
+                            <option value="2">2 - Raras</option>
+                            <option value="3">3 - Algumas</option>
+                            <option value="4">4 - Muitas</option>
+                            <option value="5">5 - Uma por mesa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">📶 Wi-Fi</label>
+                        <select name="wifi" required class="w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 p-2 text-sm">
+                            <option value="">Escolhe...</option>
+                            <option value="1">1 - Sem net</option>
+                            <option value="2">2 - Muito Lento</option>
+                            <option value="3">3 - Normal</option>
+                            <option value="4">4 - Rápido</option>
+                            <option value="5">5 - Excelente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Comentário (Opcional)</label>
+                    <textarea name="comentario" rows="2" class="w-full border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 p-2 text-sm" placeholder="Como foi a tua experiência?"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition mt-2 shadow-md">
+                    Enviar Avaliação
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/app.js"></script>
-
+    <script>
+        const utilizadorLogado = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    </script>
+    
+    <script src="js/app.js?v=3"></script>
 </body>
 </html>

@@ -94,12 +94,12 @@ carregarSpots();
 
 const modalDetalhes = document.getElementById('modal-detalhes');
 
-function abrirDetalhes(idProcurado) {
-    // Vai buscar o spot à nossa memória global
+async function abrirDetalhes(idProcurado) {
+    // 1. Vai buscar o spot à nossa memória global
     const spot = window.spotsAtuais.find(s => s.id === idProcurado);
     if (!spot) return;
 
-    // Injeta os dados no HTML do Modal
+    // 2. Injeta os dados base no HTML do Modal
     document.getElementById('detalhes-nome').innerText = spot.nome;
     document.getElementById('detalhes-tipo').innerText = spot.tipo;
     document.getElementById('detalhes-descricao').innerText = spot.descricao || "Sem descrição disponível para este local.";
@@ -109,17 +109,56 @@ function abrirDetalhes(idProcurado) {
     document.getElementById('detalhes-wifi').innerText = parseFloat(spot.media_wifi || 0).toFixed(1);
     document.getElementById('detalhes-lotacao').innerText = parseFloat(spot.media_lotacao || 0).toFixed(1);
 
-    // Configura o botão de avaliar para fechar este modal e abrir o outro de avaliação
+    // 3. NOVO: Carregar Comentários da Base de Dados
+    const divComentarios = document.getElementById('lista-comentarios');
+    
+    if (divComentarios) {
+        // Estado de loading visual para não parecer que a app encravou
+        divComentarios.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-4">A carregar opiniões da comunidade...</p>';
+        
+        try {
+            const resposta = await fetch(`api/get_reviews.php?spot_id=${idProcurado}`);
+            const reviews = await resposta.json();
+
+            divComentarios.innerHTML = ''; // Limpa o "loading"
+
+            if (reviews.erro) {
+                divComentarios.innerHTML = `<p class="text-xs text-red-500">${reviews.erro}</p>`;
+            } else if (reviews.length === 0) {
+                divComentarios.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-2">Ainda ninguém comentou este espaço. Sê o primeiro!</p>';
+            } else {
+                // Iterar sobre as reviews e desenhar o HTML de cada uma
+                reviews.forEach(rev => {
+                    const dataFormatada = new Date(rev.data_review.replace(' ', 'T')).toLocaleDateString('pt-PT');
+                    
+                    divComentarios.innerHTML += `
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 mb-2">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase">${rev.autor}</span>
+                                <span class="text-[9px] text-gray-400">${dataFormatada}</span>
+                            </div>
+                            <p class="text-xs text-gray-700 leading-relaxed">${rev.comentario}</p>
+                        </div>
+                    `;
+                });
+            }
+        } catch (erro) {
+            console.error("Erro ao buscar comentários:", erro);
+            divComentarios.innerHTML = '<p class="text-xs text-red-500">Falha ao carregar comentários. Verifica a tua ligação.</p>';
+        }
+    }
+
+    // 4. Configura o botão de avaliar para fechar este modal e abrir o outro
     const btnAvaliar = document.getElementById('btn-abrir-avaliacao');
-    if(btnAvaliar) {
+    if (btnAvaliar) {
         btnAvaliar.onclick = function() {
             fecharDetalhes(); 
             abrirAvaliacao(spot.id, spot.nome); 
         };
     }
 
-    // Mostra o modal no ecrã
-    if(modalDetalhes) modalDetalhes.classList.remove('hidden');
+    // 5. Mostra o modal no ecrã
+    if (modalDetalhes) modalDetalhes.classList.remove('hidden');
 }
 
 function fecharDetalhes() {
@@ -136,8 +175,17 @@ const formReview = document.getElementById('form-review');
 
 // Abre a janela e injeta o nome e ID do local
 function abrirAvaliacao(spotId, nome) {
+    // 1. A Auth Wall (Bloqueio de anónimos)
+    if (!utilizadorLogado) {
+        alert("Precisas de ter conta para avaliar os espaços. Vamos levar-te para o Login!");
+        window.location.href = 'login.php'; // Redireciona para a página de login
+        return; // Impede que o resto do código corra e abra o modal
+    }
+
+    // 2. Se estiver logado, o código continua normalmente
     document.getElementById('modal-spot-id').value = spotId;
     document.getElementById('modal-nome-spot').innerText = nome;
+    
     if(modalAvaliacao) modalAvaliacao.classList.remove('hidden');
 }
 
