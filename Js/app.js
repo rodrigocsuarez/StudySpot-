@@ -16,6 +16,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(mapa);
 
+// Tentar localizar o utilizador uma única vez no arranque
+if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(
+        posicao => {
+            const lat = posicao.coords.latitude;
+            const lng = posicao.coords.longitude;
+            mapa.setView([lat, lng], 14); // Centra no utilizador
+            
+            L.circleMarker([lat, lng], {
+                color: '#16a34a', fillColor: '#16a34a', fillOpacity: 0.5, radius: 8
+            }).addTo(mapa).bindPopup("Estás aqui!").openPopup();
+            
+        }, 
+        erro => {
+            
+            console.warn("Localização falhou (Código " + erro.code + "): " + erro.message);
+        },
+        {
+            enableHighAccuracy: true, // Força o uso de GPS se disponível
+            timeout: 10000,           // Dá 10 segundos ao browser antes de desistir
+            maximumAge: 0             // Não aceita localizações em cache antigas
+        }
+    );
+}
+
 const divLista = document.getElementById('lista-spots');
 
 // ==========================================
@@ -215,6 +240,95 @@ if(formReview) {
                 alert("Avaliação guardada com sucesso! Obrigado.");
             } else {
                 alert("Erro: " + (res.erro || "Falha ao submeter."));
+            }
+        })
+        .catch(erro => {
+            console.error("Erro na rede:", erro);
+            alert("Erro ao comunicar com o servidor.");
+        });
+    });
+}
+
+// ==========================================
+// 5. LÓGICA DE CRIAÇÃO DE SPOTS (CRUD - C)
+// ==========================================
+let modoCriacaoAtivo = false;
+let marcadorUser = null; // Para guardar o ponto verde do utilizador
+const modalCriacao = document.getElementById('modal-criacao');
+const formCreateSpot = document.getElementById('form-create-spot');
+
+// 1. Ativar o modo de criação
+document.getElementById('btn-ativar-criacao').addEventListener('click', () => {
+    if (!utilizadorLogado) {
+        alert("Precisas de ter sessão iniciada para adicionar locais ao mapa.");
+        window.location.href = 'login.php';
+        return;
+    }
+
+    modoCriacaoAtivo = true;
+    document.getElementById('meuMapa').style.cursor = 'crosshair';
+    alert("Modo de Criação Ativo!\nO mapa vai centrar em ti. Depois, clica no local exato do mapa para adicionar o espaço.");
+
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(posicao => {
+            const lat = posicao.coords.latitude;
+            const lng = posicao.coords.longitude;
+            mapa.setView([lat, lng], 17); 
+            
+            // Remove o ponto antigo se existir
+            if(marcadorUser) mapa.removeLayer(marcadorUser);
+            
+            // Desenha um círculo verde na localização do utilizador
+            marcadorUser = L.circleMarker([lat, lng], {
+                color: '#16a34a',
+                fillColor: '#16a34a',
+                fillOpacity: 0.5,
+                radius: 8
+            }).addTo(mapa).bindPopup("Estás aqui!").openPopup();
+
+        }, erro => {
+            console.warn("Geolocalização falhou.");
+        });
+    }
+});
+
+// 2. Intercetar o clique no Mapa para capturar coordenadas
+mapa.on('click', function(e) {
+    if (!modoCriacaoAtivo) return; 
+    
+    modoCriacaoAtivo = false;
+    document.getElementById('meuMapa').style.cursor = '';
+
+    document.getElementById('create-lat').value = e.latlng.lat;
+    document.getElementById('create-lng').value = e.latlng.lng;
+    
+    modalCriacao.classList.remove('hidden');
+});
+
+function fecharCriacao() {
+    modalCriacao.classList.add('hidden');
+    formCreateSpot.reset();
+}
+
+// 3. Intercetar o envio do formulário (Para não recarregar a página)
+if(formCreateSpot) {
+    formCreateSpot.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        const dados = new FormData(formCreateSpot);
+
+        fetch('api/create_spot.php', {
+            method: 'POST',
+            body: dados
+        })
+        .then(r => r.json())
+        .then(res => {
+            if(res.sucesso) {
+                fecharCriacao();
+                carregarSpots(); // Recarrega os locais todos, desenhando o teu novo no mapa
+                alert("Local gravado com sucesso no mapa!");
+            } else {
+                alert("Erro: " + res.erro);
             }
         })
         .catch(erro => {

@@ -65,6 +65,10 @@ if ($esta_logado) {
             <hr class="border-gray-200 mb-4">
             
             <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Recomendados perto de ti</h3>
+
+            <button id="btn-ativar-criacao" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg mb-4 shadow-md transition flex items-center justify-center gap-2">
+    <span>📍</span> Adicionar Novo Local
+</button>
             
             <div id="lista-spots" class="flex flex-col gap-3 pb-8">
                 </div>
@@ -177,6 +181,45 @@ if ($esta_logado) {
 
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition mt-2 shadow-md">
                     Enviar Avaliação
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-criacao" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            
+            <div class="bg-green-600 p-4 text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg">Criar Novo Local</h3>
+                <button onclick="fecharCriacao()" class="text-white hover:text-green-200 font-bold text-2xl leading-none">&times;</button>
+            </div>
+            
+            <form id="form-create-spot" class="p-6 space-y-4">
+                <input type="hidden" id="create-lat" name="lat">
+                <input type="hidden" id="create-lng" name="lng">
+                
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Nome do Espaço</label>
+                    <input type="text" name="nome" required class="w-full border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 bg-gray-50 p-2 text-sm" placeholder="Ex: Café Central">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Tipo</label>
+                    <select name="tipo" required class="w-full border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 bg-gray-50 p-2 text-sm">
+                        <option value="">Seleciona uma categoria...</option>
+                        <option value="Café">Café</option>
+                        <option value="Biblioteca">Biblioteca</option>
+                        <option value="Cowork">Cowork</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Descrição Breve</label>
+                    <textarea name="descricao" required rows="3" class="w-full border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 bg-gray-50 p-2 text-sm" placeholder="Como é o ambiente? Que dicas dás a quem vem estudar?"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition mt-2 shadow-md">
+                    Gravar Local
                 </button>
             </form>
         </div>
