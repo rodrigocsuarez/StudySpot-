@@ -20,7 +20,6 @@ if ($esta_logado) {
     <title>StudySpot - Encontra o teu local</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body class="h-screen flex flex-col bg-gray-50 overflow-hidden">
@@ -33,11 +32,14 @@ if ($esta_logado) {
             
             <?php if ($esta_logado): ?>
                 <div class="flex items-center gap-3">
-                    <span class="hidden md:block text-sm font-medium">Olá, <?php echo $_SESSION['user_nome']; ?></span>
-                    <button class="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-800 text-white font-bold border border-indigo-400 shadow-sm">
-                        <?php echo $inicial; ?>
-                    </button>
-                    <a href="api/logout.php" class="text-xs text-indigo-200 hover:text-white underline">Sair</a>
+                    <a href="perfil.php" class="group flex items-center gap-2 transition-transform hover:scale-105" title="Ir para o meu Perfil">
+                        <span class="hidden md:block text-sm font-medium">Olá, <?php echo $_SESSION['user_nome']; ?></span>
+                        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-indigo-800 group-hover:bg-white group-hover:text-indigo-800 text-white font-bold border border-indigo-400 shadow-sm transition-colors duration-300">
+                            <?php echo $inicial; ?>
+                        </div>
+                    </a>
+                    
+                    <a href="api/logout.php" class="text-xs text-indigo-200 hover:text-white underline ml-3 border-l border-indigo-400 pl-3">Sair</a>
                 </div>
             <?php else: ?>
                 <a href="login.php" class="bg-indigo-800 hover:bg-indigo-700 px-4 py-1 rounded font-semibold text-sm transition">
@@ -67,8 +69,8 @@ if ($esta_logado) {
             <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Recomendados perto de ti</h3>
 
             <button id="btn-ativar-criacao" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg mb-4 shadow-md transition flex items-center justify-center gap-2">
-    <span>📍</span> Adicionar Novo Local
-</button>
+                <span>📍</span> Adicionar Novo Local
+            </button>
             
             <div id="lista-spots" class="flex flex-col gap-3 pb-8">
                 </div>
@@ -76,7 +78,7 @@ if ($esta_logado) {
 
     </div>
 
-       <div id="modal-detalhes" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[90] flex items-center justify-center p-4">
+    <div id="modal-detalhes" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[90] flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
             
             <div class="bg-white p-4 border-b border-gray-100 flex justify-between items-start">
@@ -92,7 +94,7 @@ if ($esta_logado) {
                     A carregar descrição...
                 </p>
 
-                                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Média da Comunidade</h4>
+                <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Média da Comunidade</h4>
                 <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 bg-white p-4 rounded-lg border border-gray-200 mb-4 shadow-sm">
                     <div class="flex items-center gap-1"><span>🤫 Ruído:</span> <strong id="detalhes-ruido">0</strong></div>
                     <div class="flex items-center gap-1"><span>🔋 Tomadas:</span> <strong id="detalhes-tomadas">0</strong></div>
@@ -115,7 +117,6 @@ if ($esta_logado) {
         </div>
     </div>
     
-// FORMULÁRIO
     <div id="modal-avaliacao" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
             
@@ -226,7 +227,9 @@ if ($esta_logado) {
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <script>
+        // Exporta a variável de sessão para o JavaScript saber se deve bloquear ações ou não
         const utilizadorLogado = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
     </script>
     
