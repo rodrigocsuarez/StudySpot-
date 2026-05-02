@@ -33,17 +33,17 @@ Um mapa interativo onde os utilizadores podem:
 
 ## MockUps
 
-* **Login
+Login
 <img width="580" height="773" alt="Captura de ecrã 2026-05-02, às 18 40 11" src="https://github.com/user-attachments/assets/9ce15386-2681-4eda-9863-8b317c648ac2" />
-* **Homepage
+Homepage
 <img width="922" height="652" alt="Captura de ecrã 2026-05-02, às 18 52 58" src="https://github.com/user-attachments/assets/4ff25a58-16c1-47bf-9a91-06fc11cbe3e2" />
-* **Spot
+Spot
 <img width="1097" height="776" alt="Captura de ecrã 2026-05-02, às 18 56 54" src="https://github.com/user-attachments/assets/473144d1-1c82-4396-8ec0-e67bb3c7be23" />
-* **Review
+Review
 <img width="1085" height="770" alt="Captura de ecrã 2026-05-02, às 18 57 46" src="https://github.com/user-attachments/assets/ed0b6bc3-f179-470e-bca1-f85f8656d764" />
-* **Criar Spot
+Criar Spot
 <img width="896" height="638" alt="Captura de ecrã 2026-05-02, às 18 53 59" src="https://github.com/user-attachments/assets/fa460388-22e7-4f73-a738-1cadf2d3da2c" />
-* **Spot Pendente
+Spot Pendente
 <img width="1115" height="800" alt="Captura de ecrã 2026-05-02, às 18 55 14" src="https://github.com/user-attachments/assets/872deab6-3a9e-46de-b818-c3ddcbb24a67" />
 
 
