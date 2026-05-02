@@ -43,7 +43,7 @@ Um mapa interativo onde os utilizadores podem:
 <img width="1085" height="770" alt="Captura de ecrã 2026-05-02, às 18 57 46" src="https://github.com/user-attachments/assets/ed0b6bc3-f179-470e-bca1-f85f8656d764" />
 *Criar Spot
 <img width="896" height="638" alt="Captura de ecrã 2026-05-02, às 18 53 59" src="https://github.com/user-attachments/assets/fa460388-22e7-4f73-a738-1cadf2d3da2c" />
-*Spot Pendente
+**Spot Pendente
 <img width="1115" height="800" alt="Captura de ecrã 2026-05-02, às 18 55 14" src="https://github.com/user-attachments/assets/872deab6-3a9e-46de-b818-c3ddcbb24a67" />
 
 
