@@ -28,5 +28,21 @@ Um mapa interativo onde os utilizadores podem:
 * **Base de Dados:** MySQL.
 
 ## Logo
+![Logo StudySpot](imagensSS/StudySpot.png)
+
+
+## MockUps
+
+##Funcionalidades Implementadas
+* **Mapa Interativo
+* **Calculo das Medias
+* **Reviews
+* **Criar Spot
+* **Listagem de Spot
+
+##Funcionslidades a implementar
+* **Ecrã de perfil
+* **Upload e vizualização de fotografia
+* **Adm
 
 
