@@ -29,6 +29,7 @@ Um mapa interativo onde os utilizadores podem:
 
 ## Logo
 ![Logo StudySpot](imagensSS/StudySpot.png)
+<img width="2000" height="2000" alt="StudySpot" src="https://github.com/user-attachments/assets/dece8dbc-7f3e-46e6-ad57-95ba89426a13" />
 
 
 ## MockUps
@@ -44,5 +45,6 @@ Um mapa interativo onde os utilizadores podem:
 * **Ecrã de perfil
 * **Upload e vizualização de fotografia
 * **Adm
+
 
 
