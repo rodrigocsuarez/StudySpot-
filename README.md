@@ -38,13 +38,13 @@ Login
 Homepage
 <img width="922" height="652" alt="Captura de ecrã 2026-05-02, às 18 52 58" src="https://github.com/user-attachments/assets/4ff25a58-16c1-47bf-9a91-06fc11cbe3e2" />
 Spot
-<img width="796" height="557" alt="Captura de ecrã 2026-05-02, às 18 53 15" src="https://github.com/user-attachments/assets/1ef3c6c4-eb97-4b69-91f1-966221add60e" />
+<img width="1097" height="776" alt="Captura de ecrã 2026-05-02, às 18 56 54" src="https://github.com/user-attachments/assets/473144d1-1c82-4396-8ec0-e67bb3c7be23" />
 Review
-<img width="807" height="574" alt="Captura de ecrã 2026-05-02, às 18 53 32" src="https://github.com/user-attachments/assets/bb06e802-a592-4d57-b18a-5d996f69bf23" />
+<img width="1090" height="775" alt="Captura de ecrã 2026-05-02, às 18 55 33" src="https://github.com/user-attachments/assets/805246a6-b0e6-46db-88ce-3ff664f0ba9b" />
 Criar Spot
 <img width="896" height="638" alt="Captura de ecrã 2026-05-02, às 18 53 59" src="https://github.com/user-attachments/assets/fa460388-22e7-4f73-a738-1cadf2d3da2c" />
 Spot Pendente
-<img width="1116" height="787" alt="Captura de ecrã 2026-05-02, às 18 54 28" src="https://github.com/user-attachments/assets/51d6d033-f71c-441a-adff-1a35e928ee21" />
+<img width="1115" height="800" alt="Captura de ecrã 2026-05-02, às 18 55 14" src="https://github.com/user-attachments/assets/872deab6-3a9e-46de-b818-c3ddcbb24a67" />
 
 
 
