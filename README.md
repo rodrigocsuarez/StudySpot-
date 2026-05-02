@@ -40,7 +40,7 @@ Homepage
 Spot
 <img width="1097" height="776" alt="Captura de ecrã 2026-05-02, às 18 56 54" src="https://github.com/user-attachments/assets/473144d1-1c82-4396-8ec0-e67bb3c7be23" />
 Review
-<img width="1090" height="775" alt="Captura de ecrã 2026-05-02, às 18 55 33" src="https://github.com/user-attachments/assets/805246a6-b0e6-46db-88ce-3ff664f0ba9b" />
+<img width="1085" height="770" alt="Captura de ecrã 2026-05-02, às 18 57 46" src="https://github.com/user-attachments/assets/ed0b6bc3-f179-470e-bca1-f85f8656d764" />
 Criar Spot
 <img width="896" height="638" alt="Captura de ecrã 2026-05-02, às 18 53 59" src="https://github.com/user-attachments/assets/fa460388-22e7-4f73-a738-1cadf2d3da2c" />
 Spot Pendente
