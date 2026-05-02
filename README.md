@@ -60,5 +60,9 @@ Spot Pendente
 * **Upload e vizualização de fotografia
 * **Adm
 
+## Mid-fidelity Wireframe 
+<img width="942" height="639" alt="Captura_de_ecra_2026-04-27_005221" src="https://github.com/user-attachments/assets/f1e56082-5b4f-464f-b54b-c9fc2b837f76" />
+
+
 
 
