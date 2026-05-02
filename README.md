@@ -34,7 +34,7 @@ Um mapa interativo onde os utilizadores podem:
 ## MockUps
 
 Login
-<img width="849" height="809" alt="Captura de ecrã 2026-05-02, às 18 39 03" src="https://github.com/user-attachments/assets/b0837a09-fe13-4143-a52a-efbf51dbac33" />
+<img width="580" height="773" alt="Captura de ecrã 2026-05-02, às 18 40 11" src="https://github.com/user-attachments/assets/9ce15386-2681-4eda-9863-8b317c648ac2" />
 Homepage
 
 
