@@ -48,20 +48,23 @@ Spot Pendente
 
 
 
-##Funcionalidades Implementadas
+## Funcionalidades Implementadas
 * **Mapa Interativo
 * **Calculo das Medias
 * **Reviews
 * **Criar Spot
 * **Listagem de Spot
 
-##Funcionslidades a implementar
+## Funcionslidades a implementar
 * **Ecrã de perfil
 * **Upload e vizualização de fotografia
 * **Adm
 
 ## Mid-fidelity Wireframe 
 <img width="942" height="639" alt="Captura_de_ecra_2026-04-27_005221" src="https://github.com/user-attachments/assets/f1e56082-5b4f-464f-b54b-c9fc2b837f76" />
+
+## Observações
+Foi finalizado o CRUD desde a apresentação da Milestone2 e também foi corrigido os mockups de acordo com as paletas de cores.
 
 
 
