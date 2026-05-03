@@ -63,6 +63,69 @@ Spot Pendente
 ## Mid-fidelity Wireframe 
 <img width="942" height="639" alt="Captura_de_ecra_2026-04-27_005221" src="https://github.com/user-attachments/assets/f1e56082-5b4f-464f-b54b-c9fc2b837f76" />
 
+
+## Documentação da API REST 
+
+## 1. Autenticação
+
+### Login / Registo
+* **Endpoint:** `/api/auth.php`
+* **Método:** `POST`
+* **Parâmetros:** `email`, `password`, `nome` (necessário apenas no registo)
+* **Descrição:** Valida as credenciais. Se o email não existir, cria uma nova conta. Inicia a sessão no servidor.
+
+### Logout
+* **Endpoint:** `/api/logout.php`
+* **Método:** `GET` / `POST`
+* **Descrição:** Destrói a sessão atual do utilizador e redireciona para a página principal.
+
+
+## 2. Gestão de Locais (Spots)
+
+### Listar Todos os Locais
+* **Endpoint:** `/api/get_spots.php`
+* **Método:** `GET`
+* **Descrição:** Retorna a lista completa de locais disponíveis, incluindo as médias pré-calculadas de todas as métricas de avaliação.
+
+### Listar Os Meus Locais
+* **Endpoint:** `/api/get_my_spots.php`
+* **Método:** `GET`
+* **Descrição:** Retorna exclusivamente os locais registados pelo utilizador que tem a sessão atualmente ativa.
+
+### Criar Local
+* **Endpoint:** `/api/create_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `nome`, `tipo`, `descricao`, `lat`, `lng`
+* **Descrição:** Adiciona um novo ponto de estudo à base de dados. Requer autenticação.
+
+### Atualizar Local (Editar)
+* **Endpoint:** `/api/update_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `id`, `nome`, `tipo`, `descricao`
+* **Descrição:** Edita as informações de um local existente. O sistema valida internamente se o local pertence ao utilizador autenticado.
+
+### Eliminar Local
+* **Endpoint:** `/api/delete_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `id`
+* **Descrição:** Remove um local da base de dados e apaga em cascata todas as avaliações associadas a ele. Requer autenticação e validação de autoria.
+
+---
+
+## 3. Avaliações (Reviews)
+
+### Listar Avaliações de um Local
+* **Endpoint:** `/api/get_reviews.php`
+* **Método:** `GET`
+* **Parâmetros:** `spot_id` (enviado no URL)
+* **Descrição:** Retorna o histórico de comentários e notas detalhadas de um espaço específico.
+
+### Submeter Avaliação
+* **Endpoint:** `/api/submit_review.php`
+* **Método:** `POST`
+* **Parâmetros:** `spot_id`, `ruido`, `lotacao`, `tomadas`, `wifi`, `comentario`
+* **Descrição:** Regista a avaliação do utilizador para um
+
 ## Observações
 Foi finalizado o CRUD desde a apresentação da Milestone2 e também foi corrigido os mockups de acordo com as paletas de cores.
 
