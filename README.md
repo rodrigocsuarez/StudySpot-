@@ -28,5 +28,107 @@ Um mapa interativo onde os utilizadores podem:
 * **Base de Dados:** MySQL.
 
 ## Logo
+<img width="2000" height="2000" alt="StudySpot" src="https://github.com/user-attachments/assets/dece8dbc-7f3e-46e6-ad57-95ba89426a13" />
+
+
+## MockUps
+
+Login
+<img width="580" height="773" alt="Captura de ecrã 2026-05-02, às 18 40 11" src="https://github.com/user-attachments/assets/9ce15386-2681-4eda-9863-8b317c648ac2" />
+Homepage
+<img width="922" height="652" alt="Captura de ecrã 2026-05-02, às 18 52 58" src="https://github.com/user-attachments/assets/4ff25a58-16c1-47bf-9a91-06fc11cbe3e2" />
+Spot
+<img width="1097" height="776" alt="Captura de ecrã 2026-05-02, às 18 56 54" src="https://github.com/user-attachments/assets/473144d1-1c82-4396-8ec0-e67bb3c7be23" />
+Review
+<img width="1085" height="770" alt="Captura de ecrã 2026-05-02, às 18 57 46" src="https://github.com/user-attachments/assets/ed0b6bc3-f179-470e-bca1-f85f8656d764" />
+Criar Spot
+<img width="896" height="638" alt="Captura de ecrã 2026-05-02, às 18 53 59" src="https://github.com/user-attachments/assets/fa460388-22e7-4f73-a738-1cadf2d3da2c" />
+Spot Pendente
+<img width="1115" height="800" alt="Captura de ecrã 2026-05-02, às 18 55 14" src="https://github.com/user-attachments/assets/872deab6-3a9e-46de-b818-c3ddcbb24a67" />
+
+
+
+## Funcionalidades Implementadas
+* **Mapa Interativo
+* **Calculo das Medias
+* **Reviews
+* **Criar Spot
+* **Listagem de Spot
+
+## Funcionslidades a implementar
+* **Ecrã de perfil
+* **Upload e vizualização de fotografia
+* **Adm
+
+## Mid-fidelity Wireframe 
+<img width="942" height="639" alt="Captura_de_ecra_2026-04-27_005221" src="https://github.com/user-attachments/assets/f1e56082-5b4f-464f-b54b-c9fc2b837f76" />
+
+
+## Documentação da API REST 
+
+## 1. Autenticação
+
+### Login / Registo
+* **Endpoint:** `/api/auth.php`
+* **Método:** `POST`
+* **Parâmetros:** `email`, `password`, `nome` (necessário apenas no registo)
+* **Descrição:** Valida as credenciais. Se o email não existir, cria uma nova conta. Inicia a sessão no servidor.
+
+### Logout
+* **Endpoint:** `/api/logout.php`
+* **Método:** `GET` / `POST`
+* **Descrição:** Destrói a sessão atual do utilizador e redireciona para a página principal.
+
+
+## 2. Gestão de Locais (Spots)
+
+### Listar Todos os Locais
+* **Endpoint:** `/api/get_spots.php`
+* **Método:** `GET`
+* **Descrição:** Retorna a lista completa de locais disponíveis, incluindo as médias pré-calculadas de todas as métricas de avaliação.
+
+### Listar Os Meus Locais
+* **Endpoint:** `/api/get_my_spots.php`
+* **Método:** `GET`
+* **Descrição:** Retorna exclusivamente os locais registados pelo utilizador que tem a sessão atualmente ativa.
+
+### Criar Local
+* **Endpoint:** `/api/create_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `nome`, `tipo`, `descricao`, `lat`, `lng`
+* **Descrição:** Adiciona um novo ponto de estudo à base de dados. Requer autenticação.
+
+### Atualizar Local (Editar)
+* **Endpoint:** `/api/update_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `id`, `nome`, `tipo`, `descricao`
+* **Descrição:** Edita as informações de um local existente. O sistema valida internamente se o local pertence ao utilizador autenticado.
+
+### Eliminar Local
+* **Endpoint:** `/api/delete_spot.php`
+* **Método:** `POST`
+* **Parâmetros:** `id`
+* **Descrição:** Remove um local da base de dados e apaga em cascata todas as avaliações associadas a ele. Requer autenticação e validação de autoria.
+
+---
+
+## 3. Avaliações (Reviews)
+
+### Listar Avaliações de um Local
+* **Endpoint:** `/api/get_reviews.php`
+* **Método:** `GET`
+* **Parâmetros:** `spot_id` (enviado no URL)
+* **Descrição:** Retorna o histórico de comentários e notas detalhadas de um espaço específico.
+
+### Submeter Avaliação
+* **Endpoint:** `/api/submit_review.php`
+* **Método:** `POST`
+* **Parâmetros:** `spot_id`, `ruido`, `lotacao`, `tomadas`, `wifi`, `comentario`
+* **Descrição:** Regista a avaliação do utilizador para um
+
+## Observações
+Foi finalizado o CRUD desde a apresentação da Milestone2 e também foi corrigido os mockups de acordo com as paletas de cores.
+
+
 
 
