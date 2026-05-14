@@ -14,6 +14,7 @@ try {
             COALESCE(AVG(r.nota_lotacao), 0) as media_lotacao
         FROM spots s
         LEFT JOIN reviews r ON s.id = r.spot_id
+        WHERE s.status = 1 -- SÓ MOSTRA O QUE FOI APROVADO PELO ADMIN
         GROUP BY s.id
     ";
     

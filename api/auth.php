@@ -55,12 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar se o utilizador existe E se a password encriptada bate certo
             if ($user && password_verify($senha_inserida, $user['senha'])) {
-                
-                // Sucesso! Guardar os dados na sessão 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_nome'] = $user['nome'];
-                $_SESSION['user_role'] = $user['role'];
-
+                $_SESSION['is_admin'] = ($user['role'] === 'admin') ? 1 : 0;
+                echo json_encode(['sucesso' => true]);
                 header("Location: ../index.php");
                 exit();
             } else {
