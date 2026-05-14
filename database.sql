@@ -1,11 +1,11 @@
-#-- Se a base de dados já existir 
+-- Se a base de dados já existir 
 DROP DATABASE IF EXISTS studyspot_db;
 
-#-- 1. Criar a Base de Dados
+-- 1. Criar a Base de Dados
 CREATE DATABASE IF NOT EXISTS studyspot_db;
 USE studyspot_db;
 
--- 2. -- 3. Tabela de Utilizadores 
+-- 2. Tabela de Utilizadores 
 CREATE TABLE utilizadores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -26,9 +26,10 @@ CREATE TABLE spots (
     tipo ENUM('Café', 'Biblioteca', 'Cowork') NOT NULL,
     lat DECIMAL(10, 8) NOT NULL,
     lng DECIMAL(11, 8) NOT NULL,
-    descricao TEXT DEFAULT NULL, -- <-- A coluna nasce logo aqui
+    descricao TEXT DEFAULT NULL,
     criado_por INT,
-    imagem_url VARCHAR(255) DEFAULT NULL;
+    imagem_url VARCHAR(255) DEFAULT NULL, -- Correção: vírgula em vez de ponto e vírgula
+    status TINYINT DEFAULT 0,             -- Correção: Coluna de aprovação adicionada
     FOREIGN KEY (criado_por) REFERENCES utilizadores(id)
 );
 
@@ -43,34 +44,30 @@ CREATE TABLE reviews (
     nota_lotacao INT CHECK (nota_lotacao BETWEEN 1 AND 5), 
     comentario TEXT,
     data_review TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (spot_id) REFERENCES spots(id),
+    FOREIGN KEY (spot_id) REFERENCES spots(id) ON DELETE CASCADE, -- Correção: Adicionado ON DELETE CASCADE para integridade
     FOREIGN KEY (user_id) REFERENCES utilizadores(id)
 );
 
--- 1. Desativar temporariamente a verificação de chaves estrangeiras
+-- Desativar temporariamente a verificação de chaves estrangeiras
 SET FOREIGN_KEY_CHECKS = 0;
 
--- 2. Limpar as tabelas e reiniciar os IDs (Auto Increment) de volta para 1
+-- Limpar as tabelas e reiniciar os IDs (Auto Increment) de volta para 1
 TRUNCATE TABLE reviews;
 TRUNCATE TABLE spots;
 TRUNCATE TABLE utilizadores;
 
--- 3. Reativar a verificação de chaves
+-- Reativar a verificação de chaves
 SET FOREIGN_KEY_CHECKS = 1;
 
--- 4. Inserir o utilizador "Semente" (Forçamos o ID a ser 1)
-
--- Assim podemos usar o email admin@studyspot.com e a senha "password" para testar o login.
+-- Inserir o utilizador Admin (ID 1)
 INSERT INTO utilizadores (id, nome, email, senha, role) 
 VALUES (1, 'Rodrigo', 'admin@studyspot.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
--- 5. Inserir os Locais, agora com a certeza absoluta que o autor com ID 1 existe
-INSERT INTO spots (nome, tipo, lat, lng, criado_por) VALUES 
-('Biblioteca Nacional', 'Biblioteca', 38.7515, -9.1517, 1),
-('Fábrica Coffee Roasters', 'Café', 38.7189, -9.1425, 1),
-('LACS Conde d’Óbidos', 'Cowork', 38.7042, -9.1634, 1);
-
-UPDATE spots SET descricao = 'Espaço ideal para sessões de estudo profundo. Ambiente verificado pela comunidade.' WHERE id > 0;
+-- Inserir os Locais de teste (Já entram com status = 1 para estarem aprovados)
+INSERT INTO spots (nome, tipo, lat, lng, criado_por, status, descricao) VALUES 
+('Biblioteca Nacional', 'Biblioteca', 38.7515, -9.1517, 1, 1, 'Espaço ideal para sessões de estudo profundo. Ambiente verificado pela comunidade.'),
+('Fábrica Coffee Roasters', 'Café', 38.7189, -9.1425, 1, 1, 'Espaço ideal para sessões de estudo profundo. Ambiente verificado pela comunidade.'),
+('LACS Conde d’Óbidos', 'Cowork', 38.7042, -9.1634, 1, 1, 'Espaço ideal para sessões de estudo profundo. Ambiente verificado pela comunidade.');
 
 
 
