@@ -22,13 +22,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+
+    // LÓGICA DE UPLOAD DA IMAGEM
+    $imagem_url = null; // Fica nulo por defeito
+
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+        $extensao = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
+        $permitidas = ['jpg', 'jpeg', 'png', 'webp'];
+        
+        // Segurança: Só permite imagens
+        if (in_array($extensao, $permitidas)) {
+            // Gera um nome único para evitar sobreposição
+            $novo_nome = uniqid('spot_', true) . '.' . $extensao;
+            $destino = '../uploads/' . $novo_nome;
+            
+            // Cria a pasta automaticamente se não existir
+            if (!is_dir('../uploads')) {
+                mkdir('../uploads', 0777, true);
+            }
+            
+            // Move da área temporária do PHP para a pasta final
+            if (move_uploaded_file($_FILES['imagem']['tmp_name'], $destino)) {
+                // Guarda apenas o caminho relativo à raiz do site
+                $imagem_url = 'uploads/' . $novo_nome;
+            }
+        } else {
+            echo json_encode(['erro' => 'Formato de imagem inválido. Usa JPG ou PNG.']);
+            exit;
+        }
+    }
+
     try {
         $stmt = $pdo->prepare("
-            INSERT INTO spots (nome, tipo, descricao, lat, lng, criado_por) 
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO spots (nome, tipo, descricao, lat, lng, criado_por, imagem_url) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
-        // O $user_id vem da sessão, mas entra na coluna criado_por
-        $stmt->execute([$nome, $tipo, $descricao, $lat, $lng, $user_id]);
+        $stmt->execute([$nome, $tipo, $descricao, $lat, $lng, $user_id, $imagem_url]);
         
         echo json_encode(['sucesso' => true]);
 

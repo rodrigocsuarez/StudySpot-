@@ -78,18 +78,23 @@ if ($esta_logado) {
 
     </div>
 
-    <div id="modal-detalhes" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[90] flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative">
+<div id="modal-detalhes" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[90] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden relative flex flex-col max-h-[90vh]">
             
-            <div class="bg-white p-4 border-b border-gray-100 flex justify-between items-start">
+            <div id="detalhes-imagem-container" class="w-full h-48 bg-gray-100 hidden shrink-0 relative">
+                <img id="detalhes-imagem" src="" alt="Capa do Local" class="w-full h-full object-cover">
+                <button onclick="fecharDetalhes()" class="absolute top-2 right-3 text-white drop-shadow-md hover:text-gray-200 font-bold text-3xl leading-none transition">&times;</button>
+            </div>
+
+            <div class="bg-white p-4 border-b border-gray-100 flex justify-between items-start shrink-0">
                 <div>
                     <h3 class="font-bold text-xl text-gray-800" id="detalhes-nome">Nome do Local</h3>
                     <span id="detalhes-tipo" class="text-[10px] text-indigo-600 bg-indigo-50 px-2 py-1 rounded font-bold uppercase border border-indigo-100 mt-1 inline-block">Tipo</span>
                 </div>
-                <button onclick="fecharDetalhes()" class="text-gray-400 hover:text-gray-800 font-bold text-2xl leading-none transition">&times;</button>
+                <button id="btn-fechar-sem-imagem" onclick="fecharDetalhes()" class="text-gray-400 hover:text-gray-800 font-bold text-2xl leading-none transition">&times;</button>
             </div>
             
-            <div class="p-6">
+            <div class="p-6 overflow-y-auto">
                 <p id="detalhes-descricao" class="text-sm text-gray-600 mb-6 border-l-4 border-indigo-400 pl-3 bg-gray-50 py-2 rounded-r">
                     A carregar descrição...
                 </p>
@@ -195,10 +200,15 @@ if ($esta_logado) {
                 <button onclick="fecharCriacao()" class="text-white hover:text-green-200 font-bold text-2xl leading-none">&times;</button>
             </div>
             
-            <form id="form-create-spot" class="p-6 space-y-4">
+<form id="form-create-spot" class="p-6 space-y-4" enctype="multipart/form-data">
                 <input type="hidden" id="create-lat" name="lat">
                 <input type="hidden" id="create-lng" name="lng">
                 
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Fotografia do Espaço</label>
+                    <input type="file" name="imagem" accept="image/*" class="w-full border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 bg-gray-50 p-2 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                </div>
+
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Nome do Espaço</label>
                     <input type="text" name="nome" required class="w-full border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 bg-gray-50 p-2 text-sm" placeholder="Ex: Café Central">

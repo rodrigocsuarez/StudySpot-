@@ -28,6 +28,7 @@ CREATE TABLE spots (
     lng DECIMAL(11, 8) NOT NULL,
     descricao TEXT DEFAULT NULL, -- <-- A coluna nasce logo aqui
     criado_por INT,
+    imagem_url VARCHAR(255) DEFAULT NULL;
     FOREIGN KEY (criado_por) REFERENCES utilizadores(id)
 );
 
